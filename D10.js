@@ -175,7 +175,7 @@ const whatDayIsIt = () => {
 }
 whatDayIsIt()
 
-/* ESERCIZIO 8
+/* ESERCIZIO 8 - no
   Scrivi una funzione chiamata "rollTheDices" che riceve un numero come parametro.
   Deve invocare la precedente funzione dice() il numero di volte specificato nel parametro, e deve tornare un oggetto contenente una proprietà "sum":
   il suo valore deve rappresentare il totale di tutti i valori estratti con le invocazioni di dice().
@@ -239,9 +239,9 @@ const isTodayMyBirthday = (birthdayDay, birthdayMonth) => {
   const dayDifference = todayDay - birthdayDay
   const monthDifference = todayMonth - birthdayMonth
   if (todayDay === birthdayDay && todayMonth === birthdayMonth) {
-    return console.log(`true`)
+    return console.log(`Exercise 10: true`)
   } else {
-    return console.log(`false`)
+    return console.log(`Exercise 10: false`)
   }
 }
 
@@ -256,15 +256,15 @@ isTodayMyBirthday(13, 12)
   in esso la proprietà chiamata come la stringa passata come secondo parametro.
 */
 
-/* ESERCIZIO 12
+/* ESERCIZIO 12 - half
   Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
 */
 
-/* ESERCIZIO 13
+/* ESERCIZIO 13 - half
   Scrivi una funzione chiamata countMovies che ritorna il numero di film contenuti nell'array "movies" fornito.
 */
 
-/* ESERCIZIO 14
+/* ESERCIZIO 14 - half
   Scrivi una funzione chiamata "onlyTheYears" che crea un array con solamente gli anni di uscita dei film contenuti nell'array "movies" fornito.
 */
 
@@ -466,3 +466,90 @@ const movies = [
       "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg",
   },
 ]
+
+/* ESERCIZIO 12 - half
+  Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
+*/
+
+const newestMovie = () => {
+  const lastReleasedArray = []
+
+  for (let i = 0; i < movies.length; i++) {
+    const movieYear = movies[i].Year
+    const movieYearValues = parseInt(movieYear)
+    lastReleasedArray.push(movieYearValues)
+    const orderedDateMovies = lastReleasedArray.sort()
+    console.log(`Exercise 12: `, orderedDateMovies[13])
+  }
+}
+
+newestMovie()
+
+/* ESERCIZIO 13 - half
+  Scrivi una funzione chiamata countMovies che ritorna il numero di film contenuti nell'array "movies" fornito.
+*/
+
+// const countMovies = () => {
+//   for (let i = 0; i < movies.length; i++) {
+//     const numberOfMovies = movies[i]
+//     console.log(numberOfMovies)
+//   }
+// }
+
+// countMovies()
+
+const countMovies = () => {
+  movies.forEach((i) => {
+    const movieNumber = 1
+    movieCounter = i.length
+    console.log(`Exercise 13: `, movieCounter)
+  })
+}
+
+countMovies()
+
+/* ESERCIZIO 14 
+  Scrivi una funzione chiamata "onlyTheYears" che crea un array con solamente gli anni di uscita dei film contenuti nell'array "movies" fornito.
+*/
+
+const yearMovieBox = []
+
+const onlyTheYears = () => {
+  for (let i = 0; i < movies.length; i++) {
+    if (movies[i].year !== NaN) {
+      yearMovieBox.push(movies[i].year)
+      console.log(`Exercise 14`, yearMovieBox)
+    }
+  }
+}
+onlyTheYears()
+
+/* ESERCIZIO 15 - half
+  Scrivi una funzione chiamata "onlyInLastMillennium" che ritorna solamente i film prodotto nel millennio scorso contenuti nell'array "movies" fornito.
+*/
+const moviesAfter2000 = []
+
+const onlyInLastMillennium = () => {
+  for (let i = 0; i < movies.length; i++) {
+    if (movies[i].Year >= 2000) {
+      moviesAfter2000.push(movies[i].Year)
+      console.log(`Exercise 15`, moviesAfter2000)
+    }
+  }
+}
+
+onlyInLastMillennium()
+
+/* ESERCIZIO 16
+  Scrivi una funzione chiamata "sumAllTheYears" che ritorna la somma di tutti gli anni in cui sono stati prodotti i film contenuti nell'array "movies" fornito.
+*/
+
+const sumAllTheYears = () => {
+  for (let i = 0; i < movies.length; i++) {
+    const yearLength = parseInt(movies[i].Year)
+    const totYearLength = yearLength + yearLength
+    console.log(totYearLength)
+  }
+}
+
+sumAllTheYears()
