@@ -67,9 +67,11 @@ console.log(`Exercise F`, me)
   Crea un pezzo di codice per rimuovere programmaticamente l'ultimo elemento dall'array "skills" contenuto nell'oggetto "me".
 */
 
-delete me.skills[4]
+const removedSkill = me.skills.splice(4, 1) //risolto!!!
 
-console.log(`Exercise G`, me.skills[4], `Correct because it has been deleted`) // non capisco perchè mi segni undefined
+console.log(`Exercise G`, removedSkill)
+
+// console.log(`Exercise G `, me.skills[3], `Correct because it has been deleted`) // non capisco perchè mi segni undefined
 
 // Funzioni
 
@@ -90,10 +92,10 @@ dice()
   Crea una funzione chiamata "whoIsBigger" che riceve due numeri come parametri e ritorna il maggiore dei due.
 */
 
-const n1 = 9
-const n2 = 13
+// const n1 = 9
+// const n2 = 13
 
-const whoIsBigger = () => {
+const whoIsBigger = (n1, n2) => {
   if (n1 > n2) {
     return n1
   } else {
@@ -101,7 +103,7 @@ const whoIsBigger = () => {
   }
 }
 
-console.log(`Exercise 2`, whoIsBigger())
+console.log(`Exercise 2`, whoIsBigger(13, 4))
 
 /* ESERCIZIO 3 - ok
   Crea una funzione chiamata "splitMe" che riceve una stringa come parametro e ritorna un'array contenente ogni parola della stringa.
@@ -141,6 +143,7 @@ deleteOne(`CIAO`, false)
 
 const onlyLetters = (str3) => {
   const removeNumber = str3.replace(/[0-9]/g, ``) // ho cercato su internet: la formula applicata in parentesi /[0-9]/g serve per cercare ed escludere i numeri in una stringa. è una regola fissa da utilizzare ogni qualvolta ? è corretto
+
   console.log(`Exercise 5`, removeNumber)
 }
 
@@ -150,10 +153,8 @@ onlyLetters(`I have 4 dogs`)
   Crea una funzione chiamata "isThisAnEmail" che riceve una stringa come parametro e ritorna true se la stringa è un valido indirizzo email.
 */
 
-const email = `dade91@msn.com`
-
 const isThisAnEmail = (email) => {
-  if (email.includes(`@` && `.com`)) {
+  if (email.includes(`@` || `.com`)) {
     const emailResult = true
     console.log(`Exercise 6`, emailResult, `email is valid!`)
   } else {
@@ -188,30 +189,53 @@ whatDayIsIt()
   }
 */
 
-const rollTheDices = (nDice) => {
-  let sumTot = dice() * nDice
-
-  // console.log(sumTot)
-  // let sum = 0
-  // // console.log(startSum)
-  // for (let i = 0; i < nDice; i++) console.log(startSum)
-  // sum = sum + dice()
-
-  // const sumArray = []
-  //
-  console.log(`Exercise 8 (non completato)`, sumTot)
+const rollTheDices = (n) => {
+  let values = []
+  for (let i = 0; i < n; i++) {
+    values.push(dice())
+  }
+  // console.log(`Result for each throw: `, values)
+  let sum2 = values.reduce((acc, curr) => acc + curr) // prende un primo valore e lo somma per il secondo e cosi via
+  // console.log(`Sum of all results: `, sum2)
+  let Exercise8 = {
+    values: values,
+    sum: sum2,
+  }
+  console.log(`Exercise 8`, Exercise8)
 }
-rollTheDices(2)
+
+rollTheDices(5)
 
 /* ESERCIZIO 9 - ok
   Scrivi una funzione chiamata "howManyDays" che riceve una data come parametro e ritorna il numero di giorni trascorsi da tale data.
 */
 
+// const howManyDays = (givenDate, givenMonth, givenYear) => {
+//   const now = new Date()
+//   const todayDay = now.getDate()
+//   const todayMonth = now.getMonth() + 1
+//   const todayYear = now.getFullYear()
+//   const dayDifference = todayDay - givenDate
+//   const monthDifference = todayMonth - givenMonth
+//   const yearDifference = todayYear - givenYear
+
+//   const fullDifferenceDate = `${dayDifference} ${monthDifference} ${yearDifference}`
+//   console.log(
+//     `Exercise 9`,
+//     ` TIME DIFFERENCES COMPARED TO ACTUAL DATE > days: ${dayDifference}`,
+//     `months: ${monthDifference}`,
+//     `years: ${yearDifference}`
+//   )
+// }
+
+// howManyDays(7, 6, 2025)
 const howManyDays = (givenDate, givenMonth, givenYear) => {
   const now = new Date()
+
   const todayDay = now.getDate()
   const todayMonth = now.getMonth() + 1
   const todayYear = now.getFullYear()
+
   const dayDifference = todayDay - givenDate
   const monthDifference = todayMonth - givenMonth
   const yearDifference = todayYear - givenYear
@@ -225,7 +249,7 @@ const howManyDays = (givenDate, givenMonth, givenYear) => {
   )
 }
 
-howManyDays(7, 6, 2025)
+howManyDays(13, 12, 1991)
 
 /* ESERCIZIO 10 - ok
   Scrivi una funzione chiamata "isTodayMyBirthday" che deve ritornare true se oggi è il tuo compleanno, falso negli altri casi.
@@ -233,6 +257,7 @@ howManyDays(7, 6, 2025)
 
 const isTodayMyBirthday = (birthdayDay, birthdayMonth) => {
   const now = new Date()
+
   const todayDay = now.getDate()
   const todayMonth = now.getMonth() + 1
 
@@ -250,104 +275,6 @@ isTodayMyBirthday(13, 12)
 // Arrays & Oggetti
 
 // NOTA: l'array "movies" usato in alcuni esercizi è definito alla fine di questo file
-
-/* ESERCIZIO 11
-  Scrivi una funzione chiamata "deleteProp" che riceve un oggetto e una stringa come parametri; deve ritornare l'oggetto fornito dopo aver eliminato
-  in esso la proprietà chiamata come la stringa passata come secondo parametro.
-*/
-
-/* ESERCIZIO 12 - half
-  Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
-*/
-
-/* ESERCIZIO 13 - half
-  Scrivi una funzione chiamata countMovies che ritorna il numero di film contenuti nell'array "movies" fornito.
-*/
-
-/* ESERCIZIO 14 - half
-  Scrivi una funzione chiamata "onlyTheYears" che crea un array con solamente gli anni di uscita dei film contenuti nell'array "movies" fornito.
-*/
-
-/* ESERCIZIO 15
-  Scrivi una funzione chiamata "onlyInLastMillennium" che ritorna solamente i film prodotto nel millennio scorso contenuti nell'array "movies" fornito.
-*/
-
-/* ESERCIZIO 16
-  Scrivi una funzione chiamata "sumAllTheYears" che ritorna la somma di tutti gli anni in cui sono stati prodotti i film contenuti nell'array "movies" fornito.
-*/
-
-/* ESERCIZIO 17
-  Scrivi una funzione chiamata "searchByTitle" che riceve una stringa come parametro e ritorna i film nell'array "movies" fornito che la contengono nel titolo.
-*/
-
-/* ESERCIZIO 18
-  Scrivi una funzione chiamata "searchAndDivide" che riceve una stringa come parametro e ritorna un oggetto contenente due array: "match" e "unmatch".
-  "match" deve includere tutti i film dell'array "movies" fornito che contengono la stringa fornita all'interno del proprio titolo, mentre "unmatch" deve includere tutti i rimanenti.
-*/
-
-/* ESERCIZIO 19
-  Scrivi una funzione chiamata "removeIndex" che riceve un numero come parametro e ritorna l'array "movies" fornito privo dell'elemento nella posizione ricevuta come parametro.
-*/
-
-// DOM (nota: gli elementi che selezionerai non si trovano realmente nella pagina)
-
-/* ESERCIZIO 20
-  Scrivi una funzione per selezionare l'elemento dotato di id "container" all'interno della pagina.
-*/
-
-/* ESERCIZIO 21
-  Scrivi una funzione per selezionare ogni tag <td> all'interno della pagina.
-*/
-
-/* ESERCIZIO 22
-  Scrivi una funzione che, tramite un ciclo, stampa in console il testo contenuto in ogni tag <td> all'interno della pagina.
-*/
-
-/* ESERCIZIO 23
-  Scrivi una funzione per aggiungere un background di colore rosso a ogni link all'interno della pagina.
-*/
-
-/* ESERCIZIO 24
-  Scrivi una funzione per aggiungere un nuovo elemento alla lista non ordinata con id "myList".
-*/
-
-/* ESERCIZIO 25
-  Scrivi una funzione per svuotare la lista non ordinata con id "myList".
-*/
-
-/* ESERCIZIO 26
-  Scrivi una funzione per aggiungere ad ogni tag <tr> la classe CSS "test"
-*/
-
-// [EXTRA] JS Avanzato
-
-/* ESERCIZIO 27
-  Crea una funzione chiamata "halfTree" che riceve un numero come parametro e costruisce un mezzo albero di "*" (asterischi) dell'altezza fornita.
-
-  Esempio:
-  halfTree(3)
-
-  *
-  **
-  ***
-
-*/
-
-/* ESERCIZIO 28
-  Crea una funzione chiamata "tree" che riceve un numero come parametro e costruisce un albero di "*" (asterischi) dell'altezza fornita.
-
-  Esempio:
-  tree(3)
-
-    *
-   ***
-  *****
-
-*/
-
-/* ESERCIZIO 29
-  Crea una funzione chiamata "isItPrime" che riceve un numero come parametro e ritorna true se il numero fornito è un numero primo.
-*/
 
 /* Questo array viene usato per gli esercizi. Non modificarlo. */
 
@@ -467,64 +394,72 @@ const movies = [
   },
 ]
 
-/* ESERCIZIO 12 - half
+/* ESERCIZIO 11 - ok
+  Scrivi una funzione chiamata "deleteProp" che riceve un oggetto e una stringa come parametri; deve ritornare l'oggetto fornito dopo aver eliminato
+  in esso la proprietà chiamata come la stringa passata come secondo parametro.
+*/
+
+let animale = {
+  tipo: `cane`,
+  razza: `golden retriver`,
+}
+
+const deleteProp = (obj, str4) => {
+  delete obj[str4]
+  console.log(`Exercise 11`, animale)
+}
+deleteProp(animale, `razza`)
+
+/* ESERCIZIO 12 - ok
   Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
 */
 
 const newestMovie = () => {
-  const lastReleasedArray = []
+  const latestMovie = movies.reduce((currentNewest, movie) => {
+    // `reduce`, percorre l'array `movies` accumolando un valore mano a mano: il parametro `currentNewest` rappresenta il film attualmente considerato come il più recente, inizia con il primo film dell'array grazie all'argomento `movies[0]` inserito come valore iniziale. - Il secondo parametro `movie` rappresenta ogni singolo elemento (film) dell'array durante l'iterazione.
+    return parseInt(movie.Year) > parseInt(currentNewest.Year)
+      ? movie
+      : currentNewest
+  }, movies[0])
 
-  for (let i = 0; i < movies.length; i++) {
-    const movieYear = movies[i].Year
-    const movieYearValues = parseInt(movieYear)
-    lastReleasedArray.push(movieYearValues)
-    const orderedDateMovies = lastReleasedArray.sort()
-    console.log(`Exercise 12: `, orderedDateMovies[13])
-  }
+  //  parseInt(movie.Year) converte l'attributo Year del film corrente in un numero (molto utile se Year è una stringa).
+  //  parseInt(currentNewest.Year) converte anch'esso l'anno del film attualmente ritenuto il più recente.
+  //  L'operatore ternario ? confronta i due anni:
+  //  Se parseInt(movie.Year) è maggiore, significa che il film corrente (movie) è più recente e diventa il   nuovo valore accumulato (currentNewest).
+  //  Se non lo è, si mantiene il valore attuale (currentNewest).
+
+  console.log(`Exercise 12`, "The newest movie is:", latestMovie)
 }
 
 newestMovie()
 
-/* ESERCIZIO 13 - half
+/* ESERCIZIO 13 - ok
   Scrivi una funzione chiamata countMovies che ritorna il numero di film contenuti nell'array "movies" fornito.
 */
 
-// const countMovies = () => {
-//   for (let i = 0; i < movies.length; i++) {
-//     const numberOfMovies = movies[i]
-//     console.log(numberOfMovies)
-//   }
-// }
-
-// countMovies()
-
 const countMovies = () => {
-  movies.forEach((i) => {
-    const movieNumber = 1
-    movieCounter = i.length
-    console.log(`Exercise 13: `, movieCounter)
-  })
+  return movies.length
 }
+console.log(`Exercise 13`, movies.length)
 
 countMovies()
 
-/* ESERCIZIO 14 
+/* ESERCIZIO 14 - ok
   Scrivi una funzione chiamata "onlyTheYears" che crea un array con solamente gli anni di uscita dei film contenuti nell'array "movies" fornito.
 */
 
 const yearMovieBox = []
 
 const onlyTheYears = () => {
-  for (let i = 0; i < movies.length; i++) {
-    if (movies[i].year !== NaN) {
-      yearMovieBox.push(movies[i].year)
-      console.log(`Exercise 14`, yearMovieBox)
-    }
-  }
+  movies.forEach((i) => {
+    yearMovieBox.push(i.Year)
+  })
+  console.log(`Exercise 14`, yearMovieBox)
 }
+
 onlyTheYears()
 
-/* ESERCIZIO 15 - half
+/* ESERCIZIO 15 - ok
   Scrivi una funzione chiamata "onlyInLastMillennium" che ritorna solamente i film prodotto nel millennio scorso contenuti nell'array "movies" fornito.
 */
 const moviesAfter2000 = []
@@ -533,23 +468,149 @@ const onlyInLastMillennium = () => {
   for (let i = 0; i < movies.length; i++) {
     if (movies[i].Year >= 2000) {
       moviesAfter2000.push(movies[i].Year)
-      console.log(`Exercise 15`, moviesAfter2000)
     }
   }
+  console.log(`Exercise 15`, moviesAfter2000)
 }
 
 onlyInLastMillennium()
 
-/* ESERCIZIO 16
+/* ESERCIZIO 16 - ok
   Scrivi una funzione chiamata "sumAllTheYears" che ritorna la somma di tutti gli anni in cui sono stati prodotti i film contenuti nell'array "movies" fornito.
 */
 
 const sumAllTheYears = () => {
-  for (let i = 0; i < movies.length; i++) {
-    const yearLength = parseInt(movies[i].Year)
-    const totYearLength = yearLength + yearLength
-    console.log(totYearLength)
-  }
+  const yearMovieBoxNumberArray = []
+  yearMovieBox.forEach((i) => {
+    const yearMovieBoxNumber = parseInt(i++)
+    yearMovieBoxNumberArray.push(yearMovieBoxNumber)
+  })
+  let sum = yearMovieBoxNumberArray.reduce((x, y) => {
+    return x + y
+  }, 0)
+  console.log(`Exercise 16`, sum)
 }
 
 sumAllTheYears()
+
+/* ESERCIZIO 17 - ok
+  Scrivi una funzione chiamata "searchByTitle" che riceve una stringa come parametro e ritorna i film nell'array "movies" fornito che la contengono nel titolo.
+*/
+
+// console.log(movies[0].Title)
+
+// const searchByTitle = (movieTitle) => {
+//   for (let i = 0; i < movies.length; i++) {
+//     const movieTitlesText = movies[i].Title
+//     if (movieTitlesText === movieTitle) {
+//       console.log(`ok`)
+//     } else {
+//       console.log(`no`)
+//     }
+//   }
+// }
+
+// searchByTitle(`The Avengers`)
+
+const searchByTitle = (movieTitle) => {
+  // const movieTitlesText = movies[i].Title
+  movies.forEach((movie) => {
+    const movieTitleText = movie.Title
+    if (movieTitleText === movieTitle) {
+      console.log(`Exercise 17`, movie)
+    }
+  })
+}
+
+searchByTitle(`Lord of the Flies`)
+
+/* ESERCIZIO 18
+  Scrivi una funzione chiamata "searchAndDivide" che riceve una stringa come parametro e ritorna un oggetto contenente due array: "match" e "unmatch".
+  "match" deve includere tutti i film dell'array "movies" fornito che contengono la stringa fornita all'interno del proprio titolo, mentre "unmatch" deve includere tutti i rimanenti.
+*/
+
+const searchAndDivide = (searchTitle) => {
+  const match = []
+  const unmatch = []
+  movies.forEach((movie) => {
+    const movieTitleText = movie.Title
+    // console.log(movieTitleText)
+    if (
+      movieTitleText.toLowerCase().includes(searchTitle.toLowerCase()) === true
+    ) {
+      match.push(movie)
+    } else {
+      unmatch.push(movie)
+    }
+  })
+  console.log(match)
+  console.log(unmatch)
+  // console.log(`Exercise 18`, `MATCH`, match)
+  // console.log(`Exercise 18`, `UNMATCH`, unmatch)
+}
+
+searchAndDivide(`the`)
+
+/* ESERCIZIO 19
+  Scrivi una funzione chiamata "removeIndex" che riceve un numero come parametro e ritorna l'array "movies" fornito privo dell'elemento nella posizione ricevuta come parametro.
+*/
+
+// DOM (nota: gli elementi che selezionerai non si trovano realmente nella pagina)
+
+/* ESERCIZIO 20
+  Scrivi una funzione per selezionare l'elemento dotato di id "container" all'interno della pagina.
+*/
+
+/* ESERCIZIO 21
+  Scrivi una funzione per selezionare ogni tag <td> all'interno della pagina.
+*/
+
+/* ESERCIZIO 22
+  Scrivi una funzione che, tramite un ciclo, stampa in console il testo contenuto in ogni tag <td> all'interno della pagina.
+*/
+
+/* ESERCIZIO 23
+  Scrivi una funzione per aggiungere un background di colore rosso a ogni link all'interno della pagina.
+*/
+
+/* ESERCIZIO 24
+  Scrivi una funzione per aggiungere un nuovo elemento alla lista non ordinata con id "myList".
+*/
+
+/* ESERCIZIO 25
+  Scrivi una funzione per svuotare la lista non ordinata con id "myList".
+*/
+
+/* ESERCIZIO 26
+  Scrivi una funzione per aggiungere ad ogni tag <tr> la classe CSS "test"
+*/
+
+// [EXTRA] JS Avanzato
+
+/* ESERCIZIO 27
+  Crea una funzione chiamata "halfTree" che riceve un numero come parametro e costruisce un mezzo albero di "*" (asterischi) dell'altezza fornita.
+
+  Esempio:
+  halfTree(3)
+
+  *
+  **
+  ***
+
+*/
+
+/* ESERCIZIO 28
+  Crea una funzione chiamata "tree" che riceve un numero come parametro e costruisce un albero di "*" (asterischi) dell'altezza fornita.
+
+  Esempio:
+  tree(3)
+
+    *
+   ***
+  *****
+
+*/
+
+/* ESERCIZIO 29
+  Crea una funzione chiamata "isItPrime" che riceve un numero come parametro e ritorna true se il numero fornito è un numero primo.
+*/
